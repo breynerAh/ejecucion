@@ -1,0 +1,15 @@
+<div [formGroup]="formGroup">
+  <mat-label class="label">{{ label }}</mat-label>
+  <select
+    [id]="fieldName"
+    [formControlName]="fieldName"
+    (ngModelChange)="onChange?.($event)"
+  >
+    <option *ngFor="let option of options" [value]="option.id">
+      {{ option.value }}
+    </option>
+  </select>
+  <mat-error *ngFor="let errorKey of getActiveErrors()" class="error">
+    {{errorMessage?.[errorKey]}}
+  </mat-error>
+</div>

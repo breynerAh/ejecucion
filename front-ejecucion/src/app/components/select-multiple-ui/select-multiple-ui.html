@@ -1,0 +1,16 @@
+<div [formGroup]="formGroup" class="container">
+  <mat-label class="label">{{ label }}</mat-label>
+  <mat-select
+    [id]="fieldName"
+    [formControlName]="fieldName"
+    multiple
+    class="multi-select"
+  >
+    <mat-option *ngFor="let option of options" [value]="option.id">
+      {{ option.value }}
+    </mat-option>
+  </mat-select>
+  <mat-error *ngFor="let errorKey of getActiveErrors()" class="error">
+    {{errorMessage?.[errorKey]}}
+  </mat-error>
+</div>

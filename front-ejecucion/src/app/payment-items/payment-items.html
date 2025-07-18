@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="title">
+    <mat-icon>keyboard_arrow_right</mat-icon>
+    <h3>Parametrización items de pago</h3>
+  </div>
+  <div class="button-container">
+    <button class="history">
+      <mat-icon class="button-icon">history</mat-icon>
+      Historial
+    </button>
+    <button class="archive">
+      <mat-icon class="button-icon">unarchive</mat-icon>
+      Subir
+    </button>
+    <button class="add" (click)="openDialog()">
+      <mat-icon class="button-icon">add_circle</mat-icon>
+      Agregar
+    </button>
+  </div>
+
+  <app-table-ui
+    [displayedColumns]="tableColumns"
+    [data]="tableData"
+    [showActions]="true"
+  >
+  </app-table-ui>
+</div>

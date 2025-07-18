@@ -1,0 +1,45 @@
+<h2>Crear valores</h2>
+
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <mat-dialog-content class="form-grid">
+    <app-input-ui
+      [label]="'Fecha inicio'"
+      [fieldName]="'startDate'"
+      [formGroup]="formGroup"
+      [formSubmitted]="formSubmitted"
+      [errorMessage]="{required: 'Este campo es obligatorio'}"
+      type="date"
+    ></app-input-ui>
+    <app-input-ui
+      [label]="'Fecha fin'"
+      [fieldName]="'endDate'"
+      [formGroup]="formGroup"
+      [formSubmitted]="formSubmitted"
+      [errorMessage]="{required: 'Este campo es obligatorio'}"
+      type="date"
+    ></app-input-ui>
+    <app-select-ui
+      [label]="'Tipo de brigada'"
+      [fieldName]="'typeBrigade'"
+      [formGroup]="formGroup"
+      [formSubmitted]="formSubmitted"
+      [errorMessage]="{required: 'Este campo es obligatorio'}"
+      [options]="optionsB"
+    ></app-select-ui>
+    <app-input-ui
+      [label]="'Cantidad'"
+      [fieldName]="'amount'"
+      [formGroup]="formGroup"
+      [formSubmitted]="formSubmitted"
+      [errorMessage]="{
+        required: 'Este campo es obligatorio',
+        pattern: 'Este campo solo acepta números'
+      }"
+    ></app-input-ui>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="container-buttons">
+    <button mat-dialog-close class="cancel">Cancelar</button>
+    <button class="accept">Aceptar</button>
+  </mat-dialog-actions>
+</form>

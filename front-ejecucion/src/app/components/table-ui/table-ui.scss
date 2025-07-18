@@ -1,0 +1,46 @@
+.container-table {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-input {
+  width: 100%;
+  outline: none;
+  background-color: #e8edf5;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+}
+
+.table {
+  border: 1px #cfdbe8 solid;
+  margin-top: 20px;
+  height: auto;
+  border-radius: 8px;
+  min-width: 550px;
+  max-height: 500px;
+  overflow: auto;
+}
+
+.search-input {
+  width: 100%;
+  height: 35px;
+  outline: none;
+  display: flex;
+  align-items: center;
+}
+
+.mat-mdc-table {
+  background-color: transparent !important;
+}
+
+.mat-mdc-paginator {
+  background-color: transparent !important;
+}
+
+.mat-mdc-header-cell {
+  border-bottom-color: #cfdbe8 !important;
+}
+
+.mat-mdc-cell {
+  border-bottom-color: #cfdbe8 !important;
+}

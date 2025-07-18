@@ -1,0 +1,70 @@
+<mat-drawer-container class="app-layout">
+  <mat-drawer
+    class="sidebar"
+    #drawer
+    [mode]="isLargeScreen ? 'side' : 'over'"
+    [opened]="isLargeScreen"
+  >
+    <div class="menu-logo">
+      @if(!visibleIcon) {
+      <mat-icon class="icon" (click)="toggleMenu()" matButton>menu</mat-icon>
+      }
+    </div>
+    <div class="logo">
+      <div>
+        <img
+          ngSrc="/ejecucion-imagen.png"
+          alt="logo"
+          srcset="/ejecucion-imagen.png 768w, /ejecucion-imagen.png 2000w"
+        />
+      </div>
+      <p>Ejecución</p>
+    </div>
+    <nav class="menu">
+      <div *ngFor="let item of optionMenu; index as i">
+        <div
+          [ngClass]="routeActual === `/${item.route}` ? 'selected' : 'menu-option' "
+        >
+          <mat-icon class="icon-menu">{{ item.icon }}</mat-icon>
+          <a href="{{item.route}}"> {{ item.name }}</a>
+        </div>
+      </div>
+    </nav>
+  </mat-drawer>
+
+  <div class="main-content">
+    <header class="header">
+      <div class="menu-logo">
+        @if(visibleIcon) {
+        <mat-icon class="icon" (click)="toggleMenu()" matButton>menu</mat-icon>
+        }
+      </div>
+
+      <div class="header-content">
+        <div class="user-info">
+          <p>Emma Elias Ramos Altahona</p>
+          <p>Admin</p>
+        </div>
+        <div class="avatar">
+          <img
+            src="/logo.png"
+            alt="logo"
+            width="100"
+            height="100"
+            [matMenuTriggerFor]="menu"
+          />
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>Inicio</button>
+            <button mat-menu-item (click)="session.logout()">
+              Cerrar sesión
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+    </header>
+
+    <section class="content">
+      <router-outlet></router-outlet>
+    </section>
+  </div>
+</mat-drawer-container>

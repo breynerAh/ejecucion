@@ -1,0 +1,7 @@
+<div [formGroup]="formGroup">
+  <mat-label class="label">{{ label }}</mat-label>
+  <input [id]="fieldName" [formControlName]="fieldName" type="{{type}}" />
+  <mat-error *ngFor="let errorKey of getActiveErrors()" class="error">
+    {{errorMessage[errorKey]}}
+  </mat-error>
+</div>

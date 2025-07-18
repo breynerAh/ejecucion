@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="title">
+    <mat-icon>keyboard_arrow_right</mat-icon>
+    <h3>Gestión de valores para creación de metas</h3>
+  </div>
+  <div class="button-container">
+    <form [formGroup]="formGroup" class="form-container">
+      <app-select-ui
+        [label]="'Empresas'"
+        [fieldName]="'business'"
+        [formGroup]="formGroup"
+        [options]="dataBusiness"
+        [onChange]="onChange"
+      ></app-select-ui>
+      <app-select-ui
+        [label]="'Operaciones'"
+        [fieldName]="'operations'"
+        [formGroup]="formGroup"
+        [options]="dataOperations"
+        [onChange]="onChange"
+      ></app-select-ui>
+      <app-select-ui
+        [label]="'Contratos'"
+        [fieldName]="'contracts'"
+        [formGroup]="formGroup"
+        [options]="dataContracts"
+        [onChange]="onChange"
+      ></app-select-ui>
+    </form>
+
+    <button (click)="openDialog()">
+      <mat-icon class="button-icon">add_circle</mat-icon>
+      Agregar
+    </button>
+  </div>
+
+  <app-table-ui
+    [displayedColumns]="tableColumns"
+    [data]="tableData"
+    [showActions]="true"
+    [onEdit]="onEdit"
+    [onDelete]="onDelete"
+  >
+  </app-table-ui>
+</div>

@@ -1,0 +1,54 @@
+h2 {
+  margin: 10px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  max-height: 350px;
+  overflow: auto;
+}
+
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .container-buttons {
+    display: flex;
+    flex-direction: column;
+    button {
+      width: 100%;
+    }
+  }
+}
+
+.container-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.cancel {
+  width: 100px;
+  height: 35px;
+  font-size: 13px;
+  background-color: #d9d9d9;
+  color: #000000;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.accept {
+  width: 100px;
+  height: 35px;
+  background-color: #0f2d5a;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}

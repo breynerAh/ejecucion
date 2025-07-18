@@ -1,0 +1,44 @@
+<h2>Crear item de pago</h2>
+
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <mat-dialog-content class="form-grid">
+    <app-input-ui
+      [label]="'Descripción'"
+      [fieldName]="'description'"
+      [formGroup]="formGroup"
+      [formSubmitted]="formSubmitted"
+      [errorMessage]="{required: 'Este campo es obligatorio'}"
+    ></app-input-ui>
+    <app-input-ui
+      [label]="'Valor unitario'"
+      [fieldName]="'value'"
+      [formGroup]="formGroup"
+      [formSubmitted]="formSubmitted"
+      [errorMessage]="{
+        required: 'Este campo es obligatorio',
+        pattern: 'Este campo solo acepta números'
+      }"
+    ></app-input-ui>
+    <app-select-ui
+      [label]="'Tipo de localidad'"
+      [fieldName]="'locality'"
+      [formGroup]="formGroup"
+      [formSubmitted]="formSubmitted"
+      [errorMessage]="{required: 'Este campo es obligatorio'}"
+      [options]="options"
+    ></app-select-ui>
+    <app-input-ui
+      [label]="'Fecha'"
+      [fieldName]="'date'"
+      [formGroup]="formGroup"
+      [formSubmitted]="formSubmitted"
+      [errorMessage]="{required: 'Este campo es obligatorio'}"
+      type="date"
+    ></app-input-ui>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="container-buttons">
+    <button mat-dialog-close class="cancel">Cancelar</button>
+    <button class="accept">Aceptar</button>
+  </mat-dialog-actions>
+</form>

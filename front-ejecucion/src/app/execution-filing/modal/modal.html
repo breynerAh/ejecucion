@@ -1,0 +1,43 @@
+<h2>Crear Diligenciamiento</h2>
+
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <mat-dialog-content class="form-grid">
+    <app-input-ui
+      [label]="'Fecha'"
+      [fieldName]="'date'"
+      [formGroup]="formGroup"
+      [formSubmitted]="formSubmitted"
+      [errorMessage]="{required: 'Este campo es obligatorio'}"
+      type="date"
+    ></app-input-ui>
+    <app-select-ui
+      [label]="'Tipo de brigada'"
+      [fieldName]="'typeBrigade'"
+      [formGroup]="formGroup"
+      [formSubmitted]="formSubmitted"
+      [errorMessage]="{required: 'Este campo es obligatorio'}"
+      [options]="optionsB"
+    ></app-select-ui>
+    <app-select-ui
+      [label]="'Tipo de recurso'"
+      [fieldName]="'resource'"
+      [formGroup]="formGroup"
+      [formSubmitted]="formSubmitted"
+      [errorMessage]="{required: 'Este campo es obligatorio'}"
+      [options]="optionsR"
+    ></app-select-ui>
+    <app-select-multiple-ui
+      [label]="'Item de pago'"
+      [fieldName]="'item'"
+      [formGroup]="formGroup"
+      [formSubmitted]="formSubmitted"
+      [errorMessage]="{required: 'Este campo es obligatorio'}"
+      [options]="optionsI"
+    ></app-select-multiple-ui>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="container-buttons">
+    <button mat-dialog-close class="cancel">Cancelar</button>
+    <button class="accept">Aceptar</button>
+  </mat-dialog-actions>
+</form>

@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="title">
+    <mat-icon>keyboard_arrow_right</mat-icon>
+    <h3>Diligenciamiento de ejecución</h3>
+  </div>
+  <div class="button-container">
+    <button (click)="openDialog()">
+      <mat-icon class="button-icon">add_circle</mat-icon>
+      Agregar
+    </button>
+  </div>
+
+  <app-table-ui
+    [displayedColumns]="tableColumns"
+    [data]="tableData"
+    [showActions]="true"
+  >
+  </app-table-ui>
+</div>
