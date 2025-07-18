@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, Inject, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import {
   MatDialog,
@@ -14,6 +14,7 @@ import { SelectUI } from '../components/select-ui/select-ui';
 import { TableUI } from "../components/table-ui/table-ui";
 import { OvertimeService } from '../services/overtime.service';
 import { Modal } from './modal/modal';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-value-management',
@@ -39,7 +40,7 @@ export class ValueManagement implements OnInit {
   emprId: number | null = null
   operId: number | null = null
 
-  constructor(private overtimeService: OvertimeService) { }
+  constructor(private overtimeService: OvertimeService, @Inject(PLATFORM_ID) private platformId: Object) { }
 
   formBuilder = inject(FormBuilder);
   formGroup = this.formBuilder.group({
@@ -49,51 +50,51 @@ export class ValueManagement implements OnInit {
   });
 
   ngOnInit(): void {
-    this.getBusiness();
+    if (isPlatformBrowser(this.platformId)) {
+      this.getBusiness();
 
-    this.formGroup.get('business')?.valueChanges.subscribe((value) => {
-      this.emprId = value;
+      this.formGroup.get('business')?.valueChanges.subscribe((value) => {
+        this.emprId = value;
+        // Limpiar operaciones y contratos
+        this.dataOperations = [];
+        this.dataContracts = [];
+        this.formGroup.patchValue({
+          operations: null,
+          contracts: null
+        });
+        // Habilitar o deshabilitar input
+        if (value) {
+          this.formGroup.get('operations')?.enable();
+        } else {
+          this.formGroup.get('operations')?.disable();
+        }
 
-      // Limpiar operaciones y contratos
-      this.dataOperations = [];
-      this.dataContracts = [];
-      this.formGroup.patchValue({
-        operations: null,
-        contracts: null
-      });
+        if (this.emprId) {
+          this.getOperation();
+        }
+      })
 
-      // Habilitar o deshabilitar input
-      if (value) {
-        this.formGroup.get('operations')?.enable();
-      } else {
-        this.formGroup.get('operations')?.disable();
-      }
+      this.formGroup.get('operations')?.valueChanges.subscribe((value) => {
+        this.operId = value;
+        // Limpiar contratos
+        this.dataContracts = [];
+        this.formGroup.patchValue({
+          contracts: null
+        });
+        // Habilitar o deshabilitar input
+        if (value) {
+          this.formGroup.get('contracts')?.enable();
+        } else {
+          this.formGroup.get('contracts')?.disable();
+        }
 
-      if (this.emprId) {
-        this.getOperation();
-      }
-    })
-
-    this.formGroup.get('operations')?.valueChanges.subscribe((value) => {
-      this.operId = value;
-
-      // Limpiar contratos
-      this.dataContracts = [];
-      this.formGroup.patchValue({
-        contracts: null
-      });
-
-      // Habilitar o deshabilitar input
-      if (value) {
-        this.formGroup.get('contracts')?.enable();
-      } else {
-        this.formGroup.get('contracts')?.disable();
-      }
-
-      if (this.operId) {
-        this.getContracts();
-      }
-    })
+        if (this.operId) {
+          this.getContracts();
+        }
+      })
+    } else {
+      console.warn('ngOnInit: En el servidor. Saltando la carga de datos que requieren autenticación.');
+    }
   }
 
   getBusiness() {

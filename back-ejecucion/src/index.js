@@ -1,20 +1,31 @@
 import express from "express";
 import cors from "cors";
+import sequelize from "./config/db.js"
 import dotenv from "dotenv";
+import valoresContratosBrig from "./routes/valoresContratosBrig/index.js";
 
-const app = express();
 dotenv.config();
 
-
+const app = express();
 app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+	res.send('Hello World!')
 })
+app.use('/api/v1', valoresContratosBrig);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5006;
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-});
+sequelize.authenticate()
+	.then(() => {
+		console.log('Conexión a la base de datos exitosa.');
+		app.listen(PORT, () => {
+			console.log(`Servidor corriendo en http://localhost:${PORT}`);
+		});
+	})
+	.catch(err => {
+		console.error('No se pudo conectar a la base de datos:', err);
+	});
+
+sequelize.sync()
